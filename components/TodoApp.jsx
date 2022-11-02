@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { Utils } from "./TodoModel";
+import useParagonGlobal from "../hooks/useParagonGlobal";
 
 var ESCAPE_KEY = 27;
 var ENTER_KEY = 13;
@@ -177,7 +178,7 @@ class TodoApp extends React.Component {
     this.setState({ newTodo: event.target.value });
   }
 
-  handleNewTodoKeyDown(event) {
+  async handleNewTodoKeyDown(event) {
     if (event.keyCode !== ENTER_KEY) {
       return;
     }
@@ -191,6 +192,11 @@ class TodoApp extends React.Component {
       if (this.props.onNewTodo) {
         this.props.onNewTodo(val);
       }
+      const out = await paragon.request("slack", "/conversations.list", {
+        method: "GET"
+      });
+      console.log("out");
+      console.log(out);
       this.setState({ newTodo: "" });
     }
   }

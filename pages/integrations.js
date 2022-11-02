@@ -7,6 +7,7 @@ export default function Integrations({ paragonUserToken }) {
 
   // Get all integrations for this Paragon project to render their names and icons
   const integrations = paragon?.getIntegrationMetadata() || [];
+  // const integrations = Object.keys(paragon?.getUser().integrations)|| [];
 
   return (
     <Layout title="Integrations">
